@@ -1,0 +1,123 @@
+swagger: "2.0"
+info:
+  description: The swagger file for my test project
+  version: "1"
+  title: Test Project
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /items
+
+paths:
+  /name:
+    get:
+      operationId: items.read_by_name
+      summary: A list of items sorted by name
+      responses:
+        200:
+          description: Successful read items operation
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: string
+                  description: Id of the item
+                name:
+                  type: string
+                  description: Name of item
+                amount:
+                  type: integer
+                  description: Amount of the item
+  /number:
+    get:
+      operationId: items.read_by_number
+      summary: A list of items sorted by number
+      responses:
+        200:
+          description: Successful read items operation
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: string
+                  description: Id of the item
+                name:
+                  type: string
+                  description: Name of item
+                amount:
+                  type: integer
+                  description: Amount of the item
+  /create:
+    post:
+      operationId: items.create
+      summary: Create a new item
+      parameters:
+        - name: item
+          in: body
+          required: True
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              amount:
+                type: integer
+      responses:
+        201:
+          description: Succesfully created item
+          schema:
+            properties:
+              id:
+                type: string
+                description: Id of the item
+              name:
+                type: string
+                description: Name of item
+              amount:
+                type: integer
+                description: Amount of the item
+  /{id}:
+    get:
+      operationId: items.read_by_id
+      summary: Read one item
+      parameters:
+        - name: id
+          in: path
+          description: id of requested item
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read item
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Id of the item
+              name:
+                type: string
+                description: Name of item
+              amount:
+                type: integer
+                description: Amount of the item
+  /delete/{id}:
+    delete:
+      operationId: items.delete
+      summary: Delete an item
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the item to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted an item
+
+
+
